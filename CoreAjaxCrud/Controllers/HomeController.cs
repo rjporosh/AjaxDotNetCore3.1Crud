@@ -35,6 +35,12 @@ namespace CoreAjaxCrud.Controllers
         }
         public JsonResult Add([FromBody]Users user)
         {
+            var user1 = new Users();
+
+            user1.Name = user.Name;
+            user1.Age = user.Age;
+            user1.State = user.State;
+            user1.Country = user.Country;
            
             _context.User.Add(user);
             _context.SaveChanges();

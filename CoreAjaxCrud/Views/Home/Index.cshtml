@@ -124,23 +124,24 @@ function Add() {
     }
 
     var empObj = {
-        Id: $('#Id').val(),
+       
         Name: $('#Name').val(),
         Age: $('#Age').val(),
         State: $('#State').val(),
-        Country: $('#Country').val()  ,
+        Country: $('#Country').val()  
     };
     $.ajax({
         url: "/Home/Add",
         data: JSON.stringify(empObj),
+        async: true,
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
-        success: function (result) {
+        success: function (data) {
             loadData();
             getUsers();
             //  $('#myModal').modal('hide');
-            $('#Id').val(result.Id)
+            $('#Id').val(data.Id)
         },
         error: function (errormessage) {
             alert(errormessage.responseText);
@@ -179,7 +180,7 @@ function getbyID(Id) {
     if (res == false) {
         return false;
         }
-           debugger;
+         
     var empObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),

@@ -33,17 +33,20 @@ namespace CoreAjaxCrud.Controllers
         {
             return Json(_context.User.ToList());
         }
-        public JsonResult Add(Users user)
+        public JsonResult Add([FromBody]Users user)
         {
+           
             _context.User.Add(user);
             _context.SaveChanges();
             return Json(user);
         }
         public JsonResult GetbyID(int ID)
         {
-            return Json(_context.User.FirstOrDefault(x => x.Id == ID), true);
+            var user = _context.User.FirstOrDefault(x => x.Id == ID);
+
+            return Json(user);
         }
-        public JsonResult Update(Users user)
+        public JsonResult Update([FromBody]Users user)
         {
             var data = _context.User.FirstOrDefault(x => x.Id == user.Id);
             if (data != null)

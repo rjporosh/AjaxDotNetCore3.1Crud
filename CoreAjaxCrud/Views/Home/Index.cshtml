@@ -2,31 +2,7 @@
     ViewBag.Title = "Home Page";
 }
 <div class="container">
-    <script>
-            $.ajax({
-        url: "/Home/List",
-        type: "GET",
-        contentType: "application/json;charset=utf-8",
-        dataType: "json",
-        success: function (result) {
-            var html = '';
-            $.each(result, function (key, item) {
-                html += '<tr>';
-                html += '<td>' + item.Id + '</td>';
-                html += '<td>' + item.Name + '</td>';
-                html += '<td>' + item.Age + '</td>';
-                html += '<td>' + item.State + '</td>';
-                html += '<td>' + item.Country + '</td>';
-                html += '<td><a href="#" onclick="return getbyID(' + item.Id + ')">Edit</a> | <a href="#" onclick="Delele(' + item.Id + ')">Delete</a></td>';
-                html += '</tr>';
-            });
-            $('.tbody').html(html);
-        },
-        error: function (errormessage) {
-            alert(errormessage.responseText);
-        }
-    });
-    </script>
+   
     <h2>Users Record</h2>
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal" onclick="clearTextBox();">Add New User</button><br /><br />
     <table class="table table-bordered table-hover">
@@ -142,7 +118,6 @@ function loadData() {
     });
 }
 function Add() {
-    debugger;
     var res = validate();
     if (res == false) {
         return false;
@@ -198,11 +173,13 @@ function getbyID(Id) {
     });
     return false;
 }
-function Update() {
+    function Update() {
+    
     var res = validate();
     if (res == false) {
         return false;
-    }
+        }
+           debugger;
     var empObj = {
         Id: $('#Id').val(),
         Name: $('#Name').val(),
@@ -213,10 +190,12 @@ function Update() {
     $.ajax({
         url: "/Home/Update",
         data: JSON.stringify(empObj),
+       //data:new { data: JSON.stringify(empObj.data) },
+         async: true,
         type: "POST",
         contentType: "application/json;charset=utf-8",
         dataType: "json",
-        success: function (result) {
+        success: function (data) {
             loadData();
             getUsers();
             $('#myModal').modal('hide');
@@ -309,4 +288,4 @@ function validate() {
     return isValid;
 }
 </script>
-<script src="~/Scripts/Users.js"></script>
+

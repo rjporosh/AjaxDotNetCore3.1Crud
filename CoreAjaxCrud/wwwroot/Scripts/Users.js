@@ -40,7 +40,6 @@ function loadData() {
     });
 }
 function Add() {
-    debugger;
     var res = validate();
     if (res == false) {
         return false;
